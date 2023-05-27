@@ -20,7 +20,8 @@ namespace Hotels.Controllers
         }
 
         [HttpPost]
-
+        [ProducesResponseType(typeof(ICollection<HotelDetails>), 200)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<HotelDetails> Post(HotelDetails hotel)
         {
             HotelDetails hoteldetails = _repo.Add(hotel);
@@ -34,7 +35,7 @@ namespace Hotels.Controllers
         {
             IList<HotelDetails> hotels = _repo.GetAll().ToList();
             if (hotels == null)
-                return NotFound("Sorry,No hotels availbile at this moment");
+                return NotFound("Sorry,No hotels available at this moment");
             return Ok(hotels);
         }
 
@@ -43,11 +44,27 @@ namespace Hotels.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ICollection<HotelDetails>> GetHotelsByLocation(string location)
         {
-            IList<HotelDetails> hotels = _repo.GetAll().ToList();
-            if (location == null)
-                return NotFound("Sorry,No hotels availbile at this location");
-            var filteredHotels = _hotelService.GetHotelsByLocation( location);
-            return Ok(filteredHotels);
+            var filteredHotels = _hotelService.GetHotelsByLocation(location.ToLowerInvariant());
+            if(filteredHotels != null && filteredHotels.Any())
+            {
+                return Ok(filteredHotels);
+            }
+            return NotFound("Sorry,No hotels available at this location");
+            
+        }
+
+        [HttpGet("GetHotelsByAmenities")]
+        [ProducesResponseType(typeof(ICollection<HotelDetails>), 200)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<ICollection<HotelDetails>> GetHotelsByAmenities(string amenities)
+        {
+            var filteredHotels = _hotelService.GetHotelsByAmenities(amenities.ToLowerInvariant());
+            if (filteredHotels != null && filteredHotels.Any())
+            {
+                return Ok(filteredHotels);
+            }
+            return NotFound("Sorry,No hotels available with the specified amenities");
+
         }
     }
 }

@@ -17,9 +17,19 @@ namespace Hotels.Services
         {
             
             List<HotelDetails> hotels = _repo.GetAll().ToList();
-            hotels = hotels.Where(h => h.Hotel_Location == location ).ToList();
+            hotels = hotels.Where(h => h.Hotel_Location == location).ToList();
             return hotels;
+            
+        }
+        public List<HotelDetails> GetHotelsByAmenities(string amenities)
+        {
+
+            List<HotelDetails> hotels = _repo.GetAll().ToList();
+            hotels = (List<HotelDetails>)hotels.Where(h => h.Hotel_Amenities.Trim().Equals(amenities,StringComparison.OrdinalIgnoreCase));
+            return hotels;
+
         }
 
+        
     }
 }
