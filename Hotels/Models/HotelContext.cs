@@ -9,5 +9,6 @@ namespace Hotels.Models
 
         }
         public DbSet<HotelDetails> Hotels { get; set; }
+        
     }
 }
