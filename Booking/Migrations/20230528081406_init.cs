@@ -22,8 +22,7 @@ namespace Booking.Migrations
                     Room_Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Room_Level = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CheckIn_DateAndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CheckOut_DateAndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PriceBasedOnRoomType = table.Column<float>(type: "real", nullable: false)
+                    CheckOut_DateAndTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

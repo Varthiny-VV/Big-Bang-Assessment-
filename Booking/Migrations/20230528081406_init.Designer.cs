@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Booking.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    [Migration("20230528063813_init")]
+    [Migration("20230528081406_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,9 +44,6 @@ namespace Booking.Migrations
                     b.Property<string>("Hotel_Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("PriceBasedOnRoomType")
-                        .HasColumnType("real");
 
                     b.Property<string>("Room_Level")
                         .IsRequired()

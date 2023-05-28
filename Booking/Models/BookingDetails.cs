@@ -14,7 +14,7 @@ namespace Booking.Models
         public string Room_Level { get; set; }
         public DateTime CheckIn_DateAndTime { get; set; }
         public DateTime CheckOut_DateAndTime { get; set;}
-        public float PriceBasedOnRoomType { get; set; }
+       
         
     }
 }

@@ -43,9 +43,6 @@ namespace Booking.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("PriceBasedOnRoomType")
-                        .HasColumnType("real");
-
                     b.Property<string>("Room_Level")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
