@@ -16,7 +16,7 @@ namespace Rooms.Services
         {
 
             List<RoomDetails> rooms = _repo.GetAll().ToList();
-            rooms = rooms.Where(r => r.Room_Type == type).ToList();
+            rooms = rooms.Where(r => r.Room_Type.ToLower() == type.ToLower()).ToList();
             return rooms;
 
         }
@@ -34,7 +34,7 @@ namespace Rooms.Services
         {
 
             List<RoomDetails> rooms = _repo.GetAll().ToList();
-            rooms = rooms.Where(r => r.Room_Level == level).ToList();
+            rooms = rooms.Where(r => r.Room_Level.ToLower() == level.ToLower()).ToList();
             return rooms;
 
         }
@@ -43,7 +43,7 @@ namespace Rooms.Services
         {
 
             List<RoomDetails> rooms = _repo.GetAll().ToList();
-            rooms = rooms.Where(r => r.Room_Availability == availability).ToList();
+            rooms = rooms.Where(r => r.Room_Availability.ToLower() == availability.ToLower()).ToList();
             return rooms;
 
         }

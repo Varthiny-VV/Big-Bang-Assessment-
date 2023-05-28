@@ -110,7 +110,7 @@ namespace Rooms.Controllers
             {
                 return Ok(filteredRooms);
             }
-            return NotFound("Sorry,No rooms available at " + level + "level");
+            return NotFound("Sorry,No rooms available at " + level + " level");
 
         }
 

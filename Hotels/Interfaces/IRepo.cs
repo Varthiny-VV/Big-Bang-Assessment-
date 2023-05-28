@@ -4,7 +4,6 @@
 
     {
         ICollection<T> GetAll();
-
         T Add(T item);
        
     }

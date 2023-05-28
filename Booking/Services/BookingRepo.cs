@@ -24,10 +24,9 @@ namespace Booking.Services
         }
         public BookingDetails Get(int key)
         {
-            BookingDetails product = _context.Bookings.SingleOrDefault(p => p.Booking_Id == key);
-            return product;
+            BookingDetails booking = _context.Bookings.SingleOrDefault(p => p.Booking_Id == key);
+            return booking;
         }
-
         public BookingDetails Delete(int key)
         {
             try

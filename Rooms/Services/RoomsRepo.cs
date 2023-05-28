@@ -24,8 +24,8 @@ namespace Rooms.Services
         }
         public RoomDetails Get(int key)
         {
-            RoomDetails product = _context.Rooms.SingleOrDefault(p => p.Room_Id == key);
-            return product;
+            RoomDetails room = _context.Rooms.SingleOrDefault(p => p.Room_Id == key);
+            return room;
         }
 
         public RoomDetails Delete(int key)

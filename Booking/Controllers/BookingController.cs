@@ -11,15 +11,13 @@ namespace Booking.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
-
         private readonly IRepo<int, BookingDetails> _repo;
-        
-
         public BookingController(IRepo<int, BookingDetails> repo)
         {
             _repo = repo;
             
         }
+
         [Authorize(Roles = "Customer")]
         [HttpPost("BookRooms")]
         [ProducesResponseType(typeof(ICollection<BookingDetails>), 200)]

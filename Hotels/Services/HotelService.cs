@@ -15,17 +15,15 @@ namespace Hotels.Services
 
         public List<HotelDetails> GetHotelsByLocation(string location)
         {
-            
             List<HotelDetails> hotels = _repo.GetAll().ToList();
-            hotels = hotels.Where(h => h.Hotel_Location == location).ToList();
+            hotels = hotels.Where(h => h.Hotel_Location.ToLower() == location.ToLower()).ToList();
             return hotels;
             
         }
         public List<HotelDetails> GetHotelsByAmenities(string amenities)
         {
-
             List<HotelDetails> hotels = _repo.GetAll().ToList();
-            hotels = hotels.Where(h => h.Hotel_Amenities.Contains(amenities)).ToList();
+            hotels = hotels.Where(h => h.Hotel_Amenities.ToLower().Contains(amenities.ToLower())).ToList();
             return hotels;
 
         }
