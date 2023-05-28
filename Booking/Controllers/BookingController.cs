@@ -1,7 +1,9 @@
 ﻿using Booking.Interfaces;
 using Booking.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace Booking.Controllers
 {
@@ -18,7 +20,7 @@ namespace Booking.Controllers
             _repo = repo;
             
         }
-
+        [Authorize(Roles = "Customer")]
         [HttpPost("BookRooms")]
         [ProducesResponseType(typeof(ICollection<BookingDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -28,7 +30,8 @@ namespace Booking.Controllers
             return Created("BookingsList", bookingDetails);
         }
 
-        [HttpGet("GetAllBookingDetails")]
+        [Authorize(Roles = "Admin")]
+        [HttpGet("GetAllBookedRoomsDetails")]
         [ProducesResponseType(typeof(ICollection<BookingDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ICollection<BookingDetails>> Get()
@@ -39,20 +42,7 @@ namespace Booking.Controllers
             return Ok(bookings);
         }
 
-        [HttpPut("UpdateBookingStatus")]
-        [ProducesResponseType(typeof(ICollection<BookingDetails>), 200)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<BookingDetails> Edit(int id, BookingDetails bookings)
-        {
-            BookingDetails newBooking = _repo.Get(id);
-            if (newBooking == null)
-                return NotFound(new Error(2, "No such booking is present in the given id"));
-            newBooking = _repo.Update(bookings);
-            if (newBooking == null)
-                return BadRequest(new Error(1, "Unable to update booking info"));
-            return Ok(newBooking);
-        }
+        [Authorize(Roles = "Customer")]
         [HttpDelete("DeleteBookingDetails")]
         [ProducesResponseType(typeof(ICollection<BookingDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

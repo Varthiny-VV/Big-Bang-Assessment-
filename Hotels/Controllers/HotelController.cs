@@ -1,6 +1,7 @@
 ﻿using Hotels.Interfaces;
 using Hotels.Models;
 using Hotels.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace Hotels.Controllers
             _hotelService = service;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ProducesResponseType(typeof(ICollection<HotelDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -28,6 +30,7 @@ namespace Hotels.Controllers
             return Created("HotelsList", hoteldetails);
         }
 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(typeof(ICollection<HotelDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -6,7 +6,7 @@
         T Get(K key);
 
         T Add(T item);
-        T Update(T item);
+       
         T Delete(K key);
 
     }

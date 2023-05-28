@@ -47,32 +47,7 @@ namespace Booking.Services
             return null;
         }
 
-        public BookingDetails Update(BookingDetails item)
-        {
-            try
-            {
-                var updateBooking = Get(item.Booking_Id);
-                if (updateBooking != null)
-                {
-                    updateBooking.Room_Number = item.Room_Number;
-                    updateBooking.Hotel_Name = item.Hotel_Name;
-                    updateBooking.UserName = item.UserName;
-                    updateBooking.Room_Type = item.Room_Type;
-                    updateBooking.Room_Level = item.Room_Level;
-                    updateBooking.CheckIn_DateAndTime = item.CheckIn_DateAndTime;
-                    updateBooking.CheckOut_DateAndTime = item.CheckOut_DateAndTime;
-                    _context.SaveChanges();
-                    return updateBooking;
-                }
-
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-            }
-            return null;
-
-        }
+        
     }
 
 }

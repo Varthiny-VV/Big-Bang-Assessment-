@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rooms.Interfaces;
 using Rooms.Models;
@@ -20,6 +21,7 @@ namespace Rooms.Controllers
             _roomService = service;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ProducesResponseType(typeof(ICollection<RoomDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -29,6 +31,7 @@ namespace Rooms.Controllers
             return Created("RoomsList", roomdetails);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [ProducesResponseType(typeof(ICollection<RoomDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -40,6 +43,7 @@ namespace Rooms.Controllers
             return Ok(rooms);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("UpdateRoomStatus")]
         [ProducesResponseType(typeof(ICollection<RoomDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -54,6 +58,8 @@ namespace Rooms.Controllers
                 return BadRequest(new Error(1, "Unable to update room info"));
             return Ok(newRoom);
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpDelete("DeleteRoomDetails")]
         [ProducesResponseType(typeof(ICollection<RoomDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
