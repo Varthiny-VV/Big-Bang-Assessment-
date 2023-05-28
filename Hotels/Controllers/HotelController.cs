@@ -44,7 +44,7 @@ namespace Hotels.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ICollection<HotelDetails>> GetHotelsByLocation(string location)
         {
-            var filteredHotels = _hotelService.GetHotelsByLocation(location.ToLowerInvariant());
+            var filteredHotels = _hotelService.GetHotelsByLocation(location);
             if(filteredHotels != null && filteredHotels.Any())
             {
                 return Ok(filteredHotels);
@@ -58,7 +58,7 @@ namespace Hotels.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ICollection<HotelDetails>> GetHotelsByAmenities(string amenities)
         {
-            var filteredHotels = _hotelService.GetHotelsByAmenities(amenities.ToLowerInvariant());
+            var filteredHotels = _hotelService.GetHotelsByAmenities(amenities);
             if (filteredHotels != null && filteredHotels.Any())
             {
                 return Ok(filteredHotels);

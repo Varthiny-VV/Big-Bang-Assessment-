@@ -25,11 +25,12 @@ namespace Hotels.Services
         {
 
             List<HotelDetails> hotels = _repo.GetAll().ToList();
-            hotels = (List<HotelDetails>)hotels.Where(h => h.Hotel_Amenities.Trim().Equals(amenities,StringComparison.OrdinalIgnoreCase));
+            hotels = hotels.Where(h => h.Hotel_Amenities.Contains(amenities)).ToList();
             return hotels;
 
         }
-
         
+
+
     }
 }

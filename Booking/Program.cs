@@ -1,9 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using Rooms.Interfaces;
-using Rooms.Models;
-using Rooms.Services;
-
-namespace Rooms
+namespace Booking
 {
     public class Program
     {
@@ -17,12 +12,6 @@ namespace Rooms
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<RoomsContext>(opts =>
-            {
-                opts.UseSqlServer(builder.Configuration.GetConnectionString("conn"));
-            });
-            builder.Services.AddScoped<IRepo<int, RoomDetails>, RoomsRepo>();
-            builder.Services.AddScoped<RoomsService>();
 
             var app = builder.Build();
 
