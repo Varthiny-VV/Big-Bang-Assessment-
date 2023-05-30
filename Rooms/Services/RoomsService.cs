@@ -48,5 +48,18 @@ namespace Rooms.Services
 
         }
 
+        public List<RoomDetails> GetRoomsByHotelId(int hotel_id)
+        {
+
+            List<RoomDetails> rooms = _repo.GetAll().ToList();
+            rooms = rooms.Where(r => r.Hotel_Id == hotel_id).ToList();
+            return rooms;
+
+        }
+
+
+
+
+
     }
 }

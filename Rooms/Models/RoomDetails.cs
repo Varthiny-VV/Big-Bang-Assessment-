@@ -6,6 +6,8 @@ namespace Rooms.Models
     {
         [Key]
         public int Room_Id { get; set; }
+        
+        public int Hotel_Id { get; set; }
         [Required(ErrorMessage = "Room Number must be provided")]
         public int Room_Number { get; set; }
         public string Room_Type { get; set; }

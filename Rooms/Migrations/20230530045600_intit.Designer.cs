@@ -11,8 +11,8 @@ using Rooms.Models;
 namespace Rooms.Migrations
 {
     [DbContext(typeof(RoomsContext))]
-    [Migration("20230527141919_init")]
-    partial class init
+    [Migration("20230530045600_intit")]
+    partial class intit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,9 @@ namespace Rooms.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Room_Id"), 1L, 1);
+
+                    b.Property<int>("Hotel_Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Room_Availability")
                         .IsRequired()

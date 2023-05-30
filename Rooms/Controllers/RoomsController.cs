@@ -21,7 +21,7 @@ namespace Rooms.Controllers
             _roomService = service;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         [ProducesResponseType(typeof(ICollection<RoomDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -31,7 +31,7 @@ namespace Rooms.Controllers
             return Created("RoomsList", roomdetails);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         [ProducesResponseType(typeof(ICollection<RoomDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,7 +43,7 @@ namespace Rooms.Controllers
             return Ok(rooms);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("UpdateRoomStatus")]
         [ProducesResponseType(typeof(ICollection<RoomDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -59,7 +59,7 @@ namespace Rooms.Controllers
             return Ok(newRoom);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("DeleteRoomDetails")]
         [ProducesResponseType(typeof(ICollection<RoomDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -125,6 +125,20 @@ namespace Rooms.Controllers
                 return Ok(filteredRooms);
             }
             return NotFound("Sorry,No rooms are available now");
+
+        }
+
+        [HttpGet("GetRoomsByHotelId")]
+        [ProducesResponseType(typeof(ICollection<RoomDetails>), 200)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<ICollection<RoomDetails>> GetRoomsByHotelId(int hotel_id)
+        {
+            var filteredRooms = _roomService.GetRoomsByHotelId(hotel_id);
+            if (filteredRooms != null && filteredRooms.Any())
+            {
+                return Ok(filteredRooms);
+            }
+            return NotFound("Sorry,No rooms are available now in the given hotel");
 
         }
     }

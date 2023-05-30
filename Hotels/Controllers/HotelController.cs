@@ -30,7 +30,6 @@ namespace Hotels.Controllers
             return Created("HotelsList", hoteldetails);
         }
 
-        [Authorize]
         [HttpGet]
         [ProducesResponseType(typeof(ICollection<HotelDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

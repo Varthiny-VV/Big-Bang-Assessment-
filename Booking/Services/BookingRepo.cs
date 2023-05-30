@@ -18,6 +18,7 @@ namespace Booking.Services
             _context.SaveChanges();
             return item;
         }
+
         public ICollection<BookingDetails> GetAll()
         {
             return _context.Bookings.ToList();

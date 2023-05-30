@@ -1,5 +1,6 @@
 ﻿using Booking.Interfaces;
 using Booking.Models;
+using Booking.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,20 +13,34 @@ namespace Booking.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IRepo<int, BookingDetails> _repo;
-        public BookingController(IRepo<int, BookingDetails> repo)
+        private readonly BookingService _bookingService;
+        public BookingController(IRepo<int, BookingDetails> repo, BookingService service)
         {
             _repo = repo;
-            
+            _bookingService = service;
+
+
         }
 
-        [Authorize(Roles = "Customer")]
+        //[Authorize(Roles = "Customer")]
         [HttpPost("BookRooms")]
         [ProducesResponseType(typeof(ICollection<BookingDetails>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<BookingDetails> Post(BookingDetails bookings)
         {
-            BookingDetails bookingDetails = _repo.Add(bookings);
-            return Created("BookingsList", bookingDetails);
+            var roomStatus = _bookingService.CheckStatusOfRoom(bookings);
+            if(roomStatus == null)
+            {
+                BookingDetails bookingDetails = _repo.Add(bookings);
+                if(bookingDetails == null)
+                {
+                    return Created("BookingsList", bookingDetails);
+                }
+                return BadRequest(new Error(1, "Unable to book room"));
+            }
+            return NotFound(new Error(2, "Sorry,This room is already booked "));
+
+
         }
 
         [Authorize(Roles = "Admin")]
@@ -55,5 +70,6 @@ namespace Booking.Controllers
                 return BadRequest(new Error(1, "Unable to delete booking info"));
             return Ok(newBooking);
         }
+
     }
 }

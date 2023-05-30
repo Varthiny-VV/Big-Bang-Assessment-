@@ -4,7 +4,7 @@
 
 namespace Rooms.Migrations
 {
-    public partial class init : Migration
+    public partial class intit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,7 @@ namespace Rooms.Migrations
                 {
                     Room_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Hotel_Id = table.Column<int>(type: "int", nullable: false),
                     Room_Number = table.Column<int>(type: "int", nullable: false),
                     Room_Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Room_Level = table.Column<string>(type: "nvarchar(max)", nullable: false),

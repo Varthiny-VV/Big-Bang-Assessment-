@@ -26,6 +26,8 @@ namespace Booking
                 opts.UseSqlServer(builder.Configuration.GetConnectionString("conn"));
             });
             builder.Services.AddScoped<IRepo<int, BookingDetails>, BookingRepo>();
+            builder.Services.AddScoped<BookingService>();
+
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

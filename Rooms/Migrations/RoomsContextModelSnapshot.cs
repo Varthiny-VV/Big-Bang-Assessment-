@@ -29,6 +29,9 @@ namespace Rooms.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Room_Id"), 1L, 1);
 
+                    b.Property<int>("Hotel_Id")
+                        .HasColumnType("int");
+
                     b.Property<string>("Room_Availability")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
